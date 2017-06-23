@@ -1,0 +1,7 @@
+GetBalanceIntent what is my balance
+GetBalanceIntent what is my balance for {slot value|Nickname}
+GetMarketUpdate read the market update
+GetPerformanceIntent what is my performance for {slot value|Nickname}
+AMAZON.HelpIntent help
+AMAZON.StopIntent stop
+AMAZON.CancelIntent cancel

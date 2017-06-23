@@ -1,0 +1,34 @@
+{
+  "intents": [
+    {
+      "intent": "GetBalanceIntent",
+      "slots": [
+        {
+          "name": "Nickname",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "GetPerformanceIntent",
+      "slots": [
+        {
+          "name": "Nickname",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "GetMarketUpdate"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

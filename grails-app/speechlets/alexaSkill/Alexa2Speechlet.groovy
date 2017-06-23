@@ -208,7 +208,7 @@ class Alexa2Speechlet implements GrailsConfigurationAware, Speechlet {
             case 'GetBalanceIntent':
                 getBalance(request, session, context)
                 break;
-            case 'GetMarketUpdate':
+            case 'GetMarketUpdateIntent':
                 getMarketUpdate(request, session, context)
                 break;
             case 'GetPerformanceIntent':

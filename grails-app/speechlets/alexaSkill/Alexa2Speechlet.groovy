@@ -107,21 +107,26 @@ class Alexa2Speechlet implements GrailsConfigurationAware, Speechlet {
         def slot = request.intent.getSlot("Nickname")
         log.info("invoking balance for :${slot.value}")
 
+        String balance = null
         String response = null
+        def speechText = "<speak>I'm sorry, but we could not process your request right now.</speak>"
+        def cardText = "I'm sorry, but we could not process your request right now."
         if (slot) {
             response = "http://gateway.ejcodefest2016.com:8080/gateway/balance/${slot.value}".toURL().text
+            if (response != null) {
+                def slurper = new JsonSlurper()
+                def result = slurper.parseText(response)
+
+                speechText = "<speak>Your balance is <say-as interpret-as=\"unit\">\$${result.acctBalance}</say-as></speak>"
+                cardText = "Your balance is \$${result.acctBalance}"
+            }
         }
         else {
             response = 'http://gateway.ejcodefest2016.com:8080/gateway/balances/'.toURL().text
-        }
-        def speechText = "<speak>I'm sorry, but we could not process your request right now.</speak>"
-        def cardText = "I'm sorry, but we could not process your request right now."
-        if (response != null) {
-            def slurper = new JsonSlurper()
-            def result = slurper.parseText(response)
-
-            speechText = "<speak>Your balance is <say-as interpret-as=\"unit\">\$${result.acctBalance}</say-as></speak>"
-            cardText = "Your balance is \$${result.acctBalance}"
+            if (response != null) {
+                speechText = "<speak>Your balance is <say-as interpret-as=\"unit\">\$${response}</say-as></speak>"
+                cardText = "Your balance is \$${response}"
+            }
         }
         // Create the plain text output.
         speech.setSsml(speechText)
@@ -148,8 +153,8 @@ class Alexa2Speechlet implements GrailsConfigurationAware, Speechlet {
             def slurper = new JsonSlurper()
             def result = slurper.parseText(response)
 
-            speechText = "<speak>Your preformance year to date is <say-as interpret-as=\"unit\">${result.ytdPct*100}%</say-as></speak>"
-            cardText = "Your preformance year to date is ${result.ytdPct * 100}%"
+            speechText = "<speak>Your performance year to date is <say-as interpret-as=\"unit\">${result.ytdPct*100}%</say-as></speak>"
+            cardText = "Your performance year to date is ${result.ytdPct * 100}%"
         }
         // Create the plain text output.
         speech.setSsml(speechText)

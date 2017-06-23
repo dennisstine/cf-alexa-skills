@@ -1,3 +1,4 @@
+import alexaSkill.Alexa2Speechlet
 import ch.qos.logback.classic.Level
 import grails.util.BuildSettings
 import grails.util.Environment
@@ -34,4 +35,5 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
     }
     logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false)
 }
+logger("alexaSkill.Alexa2Speechlet", DEBUG, ['STDOUT'], false)
 root(ERROR, ['STDOUT'])
